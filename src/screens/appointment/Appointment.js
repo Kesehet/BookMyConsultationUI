@@ -14,11 +14,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Appointment({ isLoggedIn, appointments, onRate }) {
+function Appointment({ isLoggedIn, appointments, onRate, isLoading }) {
   const classes = useStyles();
 
   if (!isLoggedIn) {
     return <Typography variant="h6">Login to see appointments</Typography>;
+  }
+  if (isLoading) {
+    return <Typography variant="h6">Loading appointments...</Typography>;
+  }
+
+  if (appointments.length === 0) {
+    return <Typography variant="h6">No appointments found.</Typography>;
   }
 
   return (
